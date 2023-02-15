@@ -21,7 +21,7 @@
       "name": "OPENAI_API_KEY",
       "type": "text",
       "required": true,
-      "secure": false
+      "secure": true
     },
     {
       "name": "Describe_Your_Company_Tone",
@@ -29,5 +29,6 @@
       "required": true,
       "secure": false
     }
-  ]
+  ],
+  "domainWhitelist": ["api.openai.com"]
 }

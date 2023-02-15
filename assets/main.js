@@ -57,8 +57,9 @@ function generateResponse(client) {
           type: "POST",
           contentType: "application/json",
           headers: {
-            Authorization: `Bearer ${metadata.settings.OPENAI_API_KEY}`,
+            Authorization: `Bearer {{setting.OPENAI_API_KEY}}`,
           },
+          secure: true,
           data: JSON.stringify({
             // https://beta.openai.com/docs/api-reference/completions
             model: "text-davinci-003",
