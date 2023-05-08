@@ -1,0 +1,6 @@
+*.zip
+**/.zat
+**/tmp
+*.swp
+**/zcli.apps.config.json
+.DS_Store

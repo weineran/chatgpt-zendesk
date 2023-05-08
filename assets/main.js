@@ -1,50 +1,81 @@
 (function () {
+  var logLevel = "WARN"
+
+  setLogLevel(logLevel, console);
+
   var client = ZAFClient.init();
 
-  client.metadata().then(function (metadata) {
-    console.log(
-      `metadata: ${JSON.stringify(metadata, null, 2)}`
-    );
-    console.log(
-      `metadata.settings.OPENAI_API_KEY: ${JSON.stringify(metadata.settings.OPENAI_API_KEY, null, 2)}`
-    );
-  });
+  client.invoke("resize", { width: "100%", height: "350px" });
 
-  client.invoke("resize", { width: "100%", height: "250px" });
+  const resetToneButton = document.getElementById("resetToneButton");
+  resetToneButton.addEventListener(
+    "click",
+    function (event) {
+      resetTone(client);
+    },
+    useCapture = false
+  );
 
-  client.get("ticket.comment").then(function (data) {
-    // TODO: If there is already a draft, ask the user if they want to replace it.
-  }); // This returns the response draft, or empty if no draft
+  resetTone(client); // Initially, use the default tone
 
   const generateResponseButton = document.getElementById(
     "generateResponseButton"
   );
-
-  // generateResponseButton.onclick = generateResponse(client);
   generateResponseButton.addEventListener(
     "click",
     function (event) {
-      console.log("BUTTON CLICKED!");
       generateResponse(client);
     },
-    false
+    useCapture = false
   );
 })();
 
+function setLogLevel(logLevel, console) {
+  switch(logLevel) {
+    case "SILENT":
+      console.error = function(){};
+      // intentional fall through
+    case "ERROR":
+      console.warn = function(){};
+      // intentional fall through
+    case "WARN":
+      console.log = function(){};
+      console.info = function(){};
+      // intentional fall through
+    case "INFO":
+      console.debug = function(){};
+      // intentional fall through
+    case "DEBUG":
+      // do nothing
+      break;
+    default:
+      console.error(`logLevel [${logLevel}] must be one of ["SILENT", "ERROR", "WARN", "INFO", "DEBUG"]`);
+  }
+}
+
+function resetTone(client) {
+  client.metadata().then(function (metadata){
+    document.getElementById("promptTone").value = metadata.settings.Describe_Your_Company_Tone;
+  });
+}
+
 function estimateNumTokens(input) {
-  // TODO
+  // TODO(AW)
 }
 
 function generateResponse(client) {
-  
+  // TODO(AW): If there is already a draft, ask the user if they want to replace it.
+  client.get("ticket.comment").then(function (data) {
+    // This returns the response draft, or empty if no draft
+  }); 
 
   client.get("ticket.conversation").then(function (data) {
     if (data["ticket.conversation"].length > 0) {
       const lastMessage = data["ticket.conversation"][0].message.content;
 
       client.metadata().then(function (metadata) {
-        const emailTone = metadata.settings.Describe_Your_Company_Tone;
-        const toneSnippet = `Respond to the email below in a tone that is ${emailTone}.`
+        const emailTone = document.getElementById("promptTone").value;
+        const toneSnippet = `Respond to the email below in a tone that is ${emailTone}.`;
         const promptPrefix = document.getElementById("promptPrefix").value;
 
         const prompt = `${toneSnippet} ${promptPrefix}: ${lastMessage}`;
@@ -69,18 +100,16 @@ function generateResponse(client) {
           }),
         };
 
-        console.log(
+        console.debug(
           `Making request with options [${JSON.stringify(options)}].`
         );
 
         client.request(options).then(
           function (data) {
-            // showInfo(data);
-
-            console.log(
+            console.debug(
               `Received response with [${data.choices.length}] choices, first choice text [${data.choices[0].text}] and finish_reason [${data.choices[0].finish_reason}].`
             );
-            console.log(
+            console.debug(
               `Used [${data.usage.prompt_tokens}] prompt_tokens, [${data.usage.completion_tokens}] completion_tokens, and [${data.usage.total_tokens}] total_tokens.`
             );
 
@@ -90,7 +119,7 @@ function generateResponse(client) {
                 `${data.choices[0].text.trim().replaceAll("\n", "</br>")}`
               )
               .then(function (data) {
-                console.log(
+                console.debug(
                   `ticket.comment.text is now set to: ${JSON.stringify(
                     data,
                     null,
@@ -100,65 +129,10 @@ function generateResponse(client) {
               });
           },
           function (response) {
-            // showError(response);
             console.error(JSON.stringify(response, null, 2));
           }
         );
       });
     }
   });
-}
-
-function showInfo(data) {
-  var requester_data = {
-    name: data.user.name,
-    tags: data.user.tags,
-    created_at: formatDate(data.user.created_at),
-    last_login_at: formatDate(data.user.last_login_at),
-  };
-
-  var source = document.getElementById("requester-template").innerHTML;
-  var template = Handlebars.compile(source);
-  var html = template(requester_data);
-  document.getElementById("content").innerHTML = html;
-}
-
-function showError(response) {
-  var error_data = {
-    status: response.status,
-    statusText: response.statusText,
-  };
-
-  var source = document.getElementById("error-template").innerHTML;
-  var template = Handlebars.compile(source);
-  var html = template(error_data);
-  document.getElementById("content").innerHTML = html;
-}
-
-function requestUserInfo(client, id) {
-  var settings = {
-    url: "/api/v2/users/" + id + ".json",
-    type: "GET",
-    dataType: "json",
-  };
-
-  client.request(settings).then(
-    function (data) {
-      showInfo(data);
-    },
-    function (response) {
-      showError(response);
-    }
-  );
-}
-
-function formatDate(date) {
-  var cdate = new Date(date);
-  var options = {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  };
-  date = cdate.toLocaleDateString("en-us", options);
-  return date;
 }
