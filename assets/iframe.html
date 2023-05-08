@@ -17,11 +17,36 @@
   <body>
     <div id="content">
       Briefly describe how you want to respond<br />
-      <textarea id="promptPrefix" name="promptPrefix" rows="4" placeholder="e.g. Tell the customer I will look into it and respond with an update within 24 hours."></textarea><br /><br />
-      <button id="generateResponseButton" type="submit">Generate response</button><br />
+      <div id="alignmentDiv">
+        <textarea
+          id="promptPrefix"
+          name="promptPrefix"
+          rows="4"
+          placeholder="e.g. Tell the customer I will look into it and respond with an update within 24 hours."
+        ></textarea>
+        <div>Tone</div>
+        <div id="toneContainer">
+          <div id="promptToneDiv">
+            <textarea id="promptTone" name="promptTone" rows="1"></textarea>
+          </div>
+          <div id="resetButtonDiv">
+            <button id="resetToneButton" type="submit">&#8634;</button
+            ><br /><br />
+          </div>
+        </div>
+        <div id="generateResponseButtonDiv">
+          <button id="generateResponseButton" type="submit">
+            Generate response</button
+          ><br />
+        </div>
+      </div>
     </div>
     <footer>
-      <a href="https://mysite.github.io/support" target="_blank">Report bugs</a>
+      <a
+        href="https://github.com/weineran/chatgpt-zendesk-issues/issues"
+        target="_blank"
+        >Report bugs or Request features</a
+      >
     </footer>
     <script id="requester-template" type="text/x-handlebars-template">
       <table>

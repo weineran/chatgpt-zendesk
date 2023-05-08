@@ -1,8 +1,8 @@
 {
   "name": "ChatGPT for Zendesk",
   "author": {
-    "name": "Andrew",
-    "email": "weiner.andrew.j@gmail.com"
+    "name": "Andrew Weiner",
+    "email": "andrew@chamberlainsoftware.io"
   },
   "defaultLocale": "en",
   "private": true,
