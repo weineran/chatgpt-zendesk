@@ -1,0 +1,66 @@
+footer {
+  font-size: 10px;
+  padding-top: 20px;
+}
+
+.data {
+    color: #363;
+    padding-left: 6px;
+  }
+
+#content td {
+    font-size: 12px;
+    padding-top: 2px;
+}
+
+#alignmentDiv {
+  width: 95%;
+}
+
+#toneContainer {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#promptPrefix {
+  width: 100%;
+}
+
+#promptToneDiv {
+  /* margin-right: 48px; */
+  flex-grow: 1;
+}
+
+#promptTone {
+  float: left;
+  /* margin-right: 48px; */
+  width: 100%;
+}
+
+#promptTone,#resetToneButton {
+  display:inline-block;
+  vertical-align: top;
+}
+
+#promptToneDiv,#resetButtonDiv {
+  display:inline-block;
+  vertical-align: top;
+}
+
+#resetToneButton {
+  float: right;
+  margin-left: 5px;
+}
+
+#resetButtonDiv {
+  /* float: right; */
+  flex-basis: 35px;
+  box-sizing: border-box;
+}
+
+#generateResponseButtonDiv {
+  clear: both;
+}
