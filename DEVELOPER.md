@@ -26,3 +26,5 @@ zcli apps:create {app_directory}
 ```
 zcli apps:update {app_directory}
 ```
+
+Copyright Andrew Weiner 2023 All Rights Reserved

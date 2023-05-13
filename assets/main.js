@@ -1,3 +1,5 @@
+// Copyright Andrew Weiner 2023 All Rights Reserved
+
 (function () {
   var logLevel = "WARN"
 

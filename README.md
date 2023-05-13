@@ -33,3 +33,5 @@ Adjust the Tone if desired, then click "Generate response" and wait for the draf
 
 ### Help us get better!
 Please submit bug reports and feature requests to our [Issue Tracker](https://github.com/weineran/chatgpt-zendesk-issues/issues).
+
+Copyright Andrew Weiner 2023 All Rights Reserved
