@@ -41,7 +41,6 @@ function setLogLevel(logLevel, console) {
       console.warn = function(){};
       // intentional fall through
     case "WARN":
-      console.log = function(){};
       console.info = function(){};
       // intentional fall through
     case "INFO":

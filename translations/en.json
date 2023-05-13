@@ -1,8 +1,18 @@
 {
   "app": {
     "name": "ChatGPT for Zendesk",
-    "short_description": "Let ChatGPT help you compose responses to support tickets.",
-    "long_description": "Let ChatGPT help you compose responses to support tickets. \n Write a simple prompt such as \"Tell the customer you are issuing a refund\" \n and let the app draft a full response.",
-    "installation_instructions": "1. Click Install. \n2. Email us to request an API key. \n3. When you receive the API key, enter it in the \"OPENAI_API_KEY\" field."
+    "short_description": "Let ChatGPT help your support team compose responses to tickets.",
+    "long_description": "Let ChatGPT help your support team compose responses to tickets. \n Write a simple prompt such as \"Tell the customer you are issuing a refund\" \n and let the app draft a full response.",
+    "installation_instructions": "1. Click Install. \n2. Email us to request an API key. \n3. When you receive the API key, enter it in the \"OPENAI_API_KEY\" field.",
+    "parameters": {
+      "OPENAI_API_KEY": {
+        "label": "OpenAI API Key",
+        "helpText": "If you need assistance obtaining an API key, please contact us."
+      },
+      "Describe_Your_Company_Tone": {
+        "label": "Tone",
+        "helpText": "Describe the desired tone of your company's support communications. e.g. 'Formal and professional' or 'Casual and funny'"
+      }
+    }
   }
 }

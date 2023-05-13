@@ -2,10 +2,11 @@
   "name": "ChatGPT for Zendesk",
   "author": {
     "name": "Andrew Weiner",
-    "email": "andrew@chamberlainsoftware.io"
+    "email": "andrew@chamberlainsoftware.io",
+    "url": "https://github.com/weineran"
   },
   "defaultLocale": "en",
-  "private": true,
+  "private": false,
   "location": {
     "support": {
       "ticket_sidebar": {
