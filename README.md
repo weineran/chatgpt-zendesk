@@ -1,4 +1,4 @@
-# ChatGPT for Zendesk
+# ChatGPT for Support
 
 Use ChatGPT to help your support agents respond to customers!
 
@@ -15,7 +15,7 @@ Use ChatGPT to help your support agents respond to customers!
 * Be sure to save your changes.
 
 ### How to use it:
-* Open a support ticket. On the right side, you should see the ChatGPT for Zendesk app. If not, click the grid icon on the far right to display your apps.
+* Open a support ticket. On the right side, you should see the ChatGPT for Support app. If not, click the grid icon on the far right to display your apps.
 * Read the ticket thread.
 * In the right side bar, briefly describe how you would respond. e.g. "Ask them to provide more info so I can investigate the issue."
 * If desired, modify the default tone.
